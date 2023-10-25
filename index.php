@@ -2,7 +2,7 @@
 
 // echo $_SERVER['HTTP_USER_AGENT'];
 // return;
-$url = "https://www.facebook.com";
+$url = "https://www.jiropages.com";
 $handler = curl_init($url);
 $headers = array(
     // "Content-Language: en",
