@@ -11,6 +11,7 @@ $headers = array(
     "Accept-Language : en-us",
     "User-Agent : Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/118.0"
 );
+curl_setopt($ch, CURLOPT_COOKIEJAR, dirname(__FILE__) . '/cookie.txt');
 curl_setopt($handler, CURLOPT_HEADER, 0);
 curl_setopt($handler, CURLOPT_HTTPHEADER, $headers);
 curl_setopt($handler, CURLOPT_RETURNTRANSFER, true);
