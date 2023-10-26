@@ -6,7 +6,7 @@ $serverUrl = 'http://localhost:4444';
 // Chrome
 $driver = RemoteWebDriver::create($serverUrl, DesiredCapabilities::chrome());
 // $driver = ChromeDriver::start();
-echo $driver->get('https://google.com');
+echo $driver->get('https://www.google.com');
 // echo $_SERVER['HTTP_USER_AGENT'];
 // return;
 // $url = "test.php"; //"https://www.facebook.com";
