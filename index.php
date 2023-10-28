@@ -10,21 +10,19 @@ $serverUrl = 'http://localhost:9515'; //'http://192.168.0.117:4444';
 $driver = RemoteWebDriver::create($serverUrl, DesiredCapabilities::chrome());
 //get the desired webpage
 $query_url = "https://www.amazon.co.uk"; //"https://www.konga.com/search?search=gas+cookers";
+ECHO<<<_INSTRUCTIONS
+    <h1 style="text-align:center">Please solve the captcha (if any) within 30 seconds and wait for 30 seconds</h1>
+_INSTRUCTIONS;
 $driver->get($query_url);
-sleep(30);
-// $search_bar = $item->findElement(WebDriverBy::id("twotabsearchtextbox"));
-// var_dump($search_bar); return;
-// while($search_bar==null) {
-//     $search_bar = $driver->findElement(WebDriverBy::id("twotabsearchtextbox"));
-// }
-$driver->findElement(WebDriverBy::id("twotabsearchtextbox"))->sendKeys("IPhone 15")->submit();
+sleep(30); //while the code sleeps it solves the captcha test if any one is presented by the website.
+$driver->findElement(WebDriverBy::id("twotabsearchtextbox"))->sendKeys("Gas Stoves")->submit();
 $cards = $driver->findElements(WebDriverBy::cssSelector("div.puis-list-col-right"));
 foreach($cards as $card) {
     $title = $card -> findElement(WebDriverBy::cssSelector("div div div h2 a span"))->getText();
     $price = $card -> findElement(WebDriverBy::cssSelector("div.puisg-col-inner div div.puisg-row span.a-color-base"))->getText();
     echo <<<_END
-    <h1 style='margin-bottom:0px'>$title</h1>
-    <p>$price</p>
+    <h3 style='margin-bottom:0px'>$title</h3>
+    <pstyle='margin-top:0px'>$price</p>
 _END;
 }
 //quit the browsing session
