@@ -18,21 +18,27 @@ sleep(30); //while the code sleeps it solves the captcha test if any one is pres
 $driver->findElement(WebDriverBy::id("twotabsearchtextbox"))->sendKeys("Gas Stoves")->submit();
 $cards = $driver->findElements(WebDriverBy::cssSelector("div.puis-list-col-right"));
 if(count($cards)==0) {
-    $cards = $driver->findElements(WebDriverBy::cssSelector("div.s-result-item"));
+    $cards = $driver->findElements(WebDriverBy::cssSelector("div.s-result-item.s-asin"));
     $small_cards = true;
 } else {
     $small_cards =false;
 }
 foreach($cards as $card) {
     if($small_cards) {
-        $title = $card -> findElement(WebDriverBy::cssSelector("div div div div div div div div h3 a span"))->getText();
+        $title = $card -> findElement(WebDriverBy::cssSelector("div.s-title-instructions-style h2 a span"))->getText();
+        try {
+            $price = $card -> findElement(WebDriverBy::cssSelector("div.s-price-instructions-style div a span"))->getText();
+        } catch(\Exception $e) {
+            $price = "No Offers";
+        }
+        
     } else {
         $title = $card -> findElement(WebDriverBy::cssSelector("div div div h2 a span"))->getText();
-        // $price = $card -> findElement(WebDriverBy::cssSelector("div.puisg-col-inner div div.puisg-row span.a-color-base"))->getText();
+        $price = $card -> findElement(WebDriverBy::cssSelector("div.puisg-col-inner div div.puisg-row span.a-color-base"))->getText();
     }
     echo <<<_END
     <h3 style='margin-bottom:0px'>$title</h3>
-    <pstyle='margin-top:0px'></p>
+    <pstyle='margin-top:0px'>$price</p>
 _END;
 }
 //quit the browsing session
