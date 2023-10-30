@@ -17,12 +17,22 @@ $driver->get($query_url);
 sleep(30); //while the code sleeps it solves the captcha test if any one is presented by the website.
 $driver->findElement(WebDriverBy::id("twotabsearchtextbox"))->sendKeys("Gas Stoves")->submit();
 $cards = $driver->findElements(WebDriverBy::cssSelector("div.puis-list-col-right"));
+if(count($cards)==0) {
+    $cards = $driver->findElements(WebDriverBy::cssSelector("div.s-result-item"));
+    $small_cards = true;
+} else {
+    $small_cards =false;
+}
 foreach($cards as $card) {
-    $title = $card -> findElement(WebDriverBy::cssSelector("div div div h2 a span"))->getText();
-    $price = $card -> findElement(WebDriverBy::cssSelector("div.puisg-col-inner div div.puisg-row span.a-color-base"))->getText();
+    if($small_cards) {
+        $title = $card -> findElement(WebDriverBy::cssSelector("div div div div div div div div h3 a span"))->getText();
+    } else {
+        $title = $card -> findElement(WebDriverBy::cssSelector("div div div h2 a span"))->getText();
+        // $price = $card -> findElement(WebDriverBy::cssSelector("div.puisg-col-inner div div.puisg-row span.a-color-base"))->getText();
+    }
     echo <<<_END
     <h3 style='margin-bottom:0px'>$title</h3>
-    <pstyle='margin-top:0px'>$price</p>
+    <pstyle='margin-top:0px'></p>
 _END;
 }
 //quit the browsing session
