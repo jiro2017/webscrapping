@@ -31,7 +31,6 @@ foreach($cards as $card) {
         } catch(\Exception $e) {
             $price = "No Offers";
         }
-        
     } else {
         $title = $card -> findElement(WebDriverBy::cssSelector("div div div h2 a span"))->getText();
         $price = $card -> findElement(WebDriverBy::cssSelector("div.puisg-col-inner div div.puisg-row span.a-color-base"))->getText();
