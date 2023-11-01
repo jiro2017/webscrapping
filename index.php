@@ -55,24 +55,28 @@ _END;
 }
 
 $spreadsheet = new Spreadsheet();
-$title_row_count = 1;
+$activeWorksheet = $spreadsheet->getActiveSheet();
+$activeWorksheet->setCellValue("A1", "Title");
+$activeWorksheet->setCellValue("B1", "Price");
+
+$title_row_count = 2;
 $max_titles = count($data['titles']);
 while($title_row_count <= $max_titles) {
     $activeWorksheet = $spreadsheet->getActiveSheet();
-    $activeWorksheet->setCellValue("A$title_row_count", $data['titles'][$title_row_count -1]);
+    $activeWorksheet->setCellValue("A$title_row_count", $data['titles'][$title_row_count -2]);
     $title_row_count++;
 }
 
-$price_row_count = 1;
+$price_row_count = 2;
 $max_prices = count($data['prices']);
 while($price_row_count <= $max_titles) {
     $activeWorksheet = $spreadsheet->getActiveSheet();
-    $activeWorksheet->setCellValue("B$price_row_count", $data['prices'][$price_row_count -1]);
+    $activeWorksheet->setCellValue("B$price_row_count", $data['prices'][$price_row_count -2]);
     $price_row_count++;
 }
 
 $writer = new Xlsx($spreadsheet);
-$writer->save('amazon_products.xlsx');
+$writer->save('amazon_products_books.xlsx');
 
 
 //quit the browsing session
