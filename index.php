@@ -48,10 +48,10 @@ foreach($cards as $card) {
     }
     $data["titles"][]=$title;
     $data["prices"][]=$price;
-    echo <<<_END
-    <h3 style='margin-bottom:0px'>$title</h3>
-    <pstyle='margin-top:0px'>$price</p>
-_END;
+//     echo <<<_END
+//     <h3 style='margin-bottom:0px'>$title</h3>
+//     <pstyle='margin-top:0px'>$price</p>
+// _END;
 }
 
 $spreadsheet = new Spreadsheet();
@@ -77,8 +77,9 @@ while($price_row_count <= $max_titles) {
 
 $writer = new Xlsx($spreadsheet);
 $writer->save('amazon_products_books.xlsx');
-
-
+echo <<<_STATUS
+    <h1>Data scrapped and saved in Excel file successfully.</h1>
+_STATUS;
 //quit the browsing session
 //$driver->quit();
 
