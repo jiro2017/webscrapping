@@ -8,6 +8,7 @@ class ComposerStaticInitd53597712f7b8d8f9b7484e953944915
 {
     public static $files = array (
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
+        '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
@@ -15,6 +16,10 @@ class ComposerStaticInitd53597712f7b8d8f9b7484e953944915
     );
 
     public static $prefixLengthsPsr4 = array (
+        'Z' => 
+        array (
+            'ZipStream\\' => 10,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
@@ -22,8 +27,14 @@ class ComposerStaticInitd53597712f7b8d8f9b7484e953944915
         ),
         'P' => 
         array (
+            'Psr\\SimpleCache\\' => 16,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
+            'PhpOffice\\PhpSpreadsheet\\' => 25,
+        ),
+        'M' => 
+        array (
+            'Matrix\\' => 7,
         ),
         'G' => 
         array (
@@ -35,9 +46,17 @@ class ComposerStaticInitd53597712f7b8d8f9b7484e953944915
         array (
             'Facebook\\WebDriver\\' => 19,
         ),
+        'C' => 
+        array (
+            'Complex\\' => 8,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'ZipStream\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/maennchen/zipstream-php/src',
+        ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
@@ -46,14 +65,26 @@ class ComposerStaticInitd53597712f7b8d8f9b7484e953944915
         array (
             0 => __DIR__ . '/..' . '/symfony/process',
         ),
+        'Psr\\SimpleCache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/simple-cache/src',
+        ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-client/src',
+        ),
+        'PhpOffice\\PhpSpreadsheet\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet',
+        ),
+        'Matrix\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/markbaker/matrix/classes/src',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
@@ -71,6 +102,20 @@ class ComposerStaticInitd53597712f7b8d8f9b7484e953944915
         array (
             0 => __DIR__ . '/..' . '/php-webdriver/webdriver/lib',
         ),
+        'Complex\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/markbaker/complex/classes/src',
+        ),
+    );
+
+    public static $prefixesPsr0 = array (
+        'H' => 
+        array (
+            'HTMLPurifier' => 
+            array (
+                0 => __DIR__ . '/..' . '/ezyang/htmlpurifier/library',
+            ),
+        ),
     );
 
     public static $classMap = array (
@@ -82,6 +127,7 @@ class ComposerStaticInitd53597712f7b8d8f9b7484e953944915
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitd53597712f7b8d8f9b7484e953944915::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitd53597712f7b8d8f9b7484e953944915::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitd53597712f7b8d8f9b7484e953944915::$prefixesPsr0;
             $loader->classMap = ComposerStaticInitd53597712f7b8d8f9b7484e953944915::$classMap;
 
         }, null, ClassLoader::class);

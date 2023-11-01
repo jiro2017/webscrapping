@@ -6,6 +6,10 @@ require_once 'vendor/autoload.php';
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 $serverUrl = 'http://localhost:9515'; //'http://192.168.0.117:4444';
 //Chrome
 $driver = RemoteWebDriver::create($serverUrl, DesiredCapabilities::chrome());
@@ -25,7 +29,9 @@ if(count($cards)==0) {
     $small_cards =false;
 }
 
+$data = array("titles" => array(), "prices" => array());
 foreach($cards as $card) {
+    global $data;
     if($small_cards) {
         $title = $card -> findElement(WebDriverBy::cssSelector("div.s-title-instructions-style h2 a span"))->getText();
         try {
@@ -40,11 +46,35 @@ foreach($cards as $card) {
         $price_fraction = $card -> findElement(WebDriverBy::cssSelector("span.a-price span.a-price-fraction"))->getText();
         $price = $price_symbol.$price_whole.".".$price_fraction;
     }
+    $data["titles"][]=$title;
+    $data["prices"][]=$price;
     echo <<<_END
     <h3 style='margin-bottom:0px'>$title</h3>
     <pstyle='margin-top:0px'>$price</p>
 _END;
 }
+
+$spreadsheet = new Spreadsheet();
+$title_row_count = 1;
+$max_titles = count($data['titles']);
+while($title_row_count <= $max_titles) {
+    $activeWorksheet = $spreadsheet->getActiveSheet();
+    $activeWorksheet->setCellValue("A$title_row_count", $data['titles'][$title_row_count -1]);
+    $title_row_count++;
+}
+
+$price_row_count = 1;
+$max_prices = count($data['prices']);
+while($price_row_count <= $max_titles) {
+    $activeWorksheet = $spreadsheet->getActiveSheet();
+    $activeWorksheet->setCellValue("B$price_row_count", $data['prices'][$price_row_count -1]);
+    $price_row_count++;
+}
+
+$writer = new Xlsx($spreadsheet);
+$writer->save('amazon_products.xlsx');
+
+
 //quit the browsing session
 //$driver->quit();
 
