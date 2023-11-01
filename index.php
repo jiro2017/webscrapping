@@ -10,9 +10,9 @@ $serverUrl = 'http://localhost:9515'; //'http://192.168.0.117:4444';
 $driver = RemoteWebDriver::create($serverUrl, DesiredCapabilities::chrome());
 //get the desired webpage
 $query_url = "https://www.amazon.co.uk"; //"https://www.konga.com/search?search=gas+cookers";
-ECHO<<<_INSTRUCTIONS
-    <h1 style="text-align:center">Please solve the captcha (if any) within 30 seconds and wait for 30 seconds</h1>
-_INSTRUCTIONS;
+// ECHO<<<_INSTRUCTIONS
+//     <h1 style="text-align:center">Please solve the captcha (if any) within 30 seconds and wait for 30 seconds</h1>
+// _INSTRUCTIONS;
 $driver->get($query_url);
 sleep(30); //while the code sleeps it solves the captcha test if any one is presented by the website.
 $driver->findElement(WebDriverBy::id("twotabsearchtextbox"))->sendKeys("Gas Stoves")->submit();
@@ -23,6 +23,7 @@ if(count($cards)==0) {
 } else {
     $small_cards =false;
 }
+
 foreach($cards as $card) {
     if($small_cards) {
         $title = $card -> findElement(WebDriverBy::cssSelector("div.s-title-instructions-style h2 a span"))->getText();
@@ -33,7 +34,10 @@ foreach($cards as $card) {
         }
     } else {
         $title = $card -> findElement(WebDriverBy::cssSelector("div div div h2 a span"))->getText();
-        $price = $card -> findElement(WebDriverBy::cssSelector("div.puisg-col-inner div div.puisg-row span.a-color-base"))->getText();
+        $price_symbol = $card -> findElement(WebDriverBy::cssSelector("span.a-price span.a-price-symbol"))->getText();
+        $price_whole = $card -> findElement(WebDriverBy::cssSelector("span.a-price span.a-price-whole"))->getText();
+        $price_fraction = $card -> findElement(WebDriverBy::cssSelector("span.a-price span.a-price-fraction"))->getText();
+        $price = $price_symbol.$price_whole.".".$price_fraction;
     }
     echo <<<_END
     <h3 style='margin-bottom:0px'>$title</h3>
