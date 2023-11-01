@@ -1,5 +1,6 @@
 <?php
 namespace Facebook\WebDriver;
+ini_set("display_errors", "1");
 require_once 'vendor/autoload.php';
 /** Scapping webpages using Selenium based webdriver */
 use Facebook\WebDriver\Remote\RemoteWebDriver;
