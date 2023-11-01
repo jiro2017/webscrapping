@@ -16,7 +16,7 @@ $query_url = "https://www.amazon.co.uk"; //"https://www.konga.com/search?search=
 // _INSTRUCTIONS;
 $driver->get($query_url);
 sleep(30); //while the code sleeps it solves the captcha test if any one is presented by the website.
-$driver->findElement(WebDriverBy::id("twotabsearchtextbox"))->sendKeys("Gas Stoves")->submit();
+$driver->findElement(WebDriverBy::id("twotabsearchtextbox"))->sendKeys("Quantum Mechanics")->submit();
 $cards = $driver->findElements(WebDriverBy::cssSelector("div.puis-list-col-right"));
 if(count($cards)==0) {
     $cards = $driver->findElements(WebDriverBy::cssSelector("div.s-result-item.s-asin"));
